@@ -1,86 +1,84 @@
+#include "election.h"
 #include <stdio.h>
-#include <stdlib.h>
-#include "electeur.h"
+#include<string.h>
+
+int ajouter(char * M, election e )
 {
-    
-int ajouter(char * filename, electeur  )
-{
-    FILE * f=fopen(filename, "a");
+    FILE * f=fopen(M, "a");
     if(f!=NULL)
     {
-        fprintf(f,"%d %s %d %d\n",p.id,p.couleur,p.x,p.y);
+        fprintf(f,"%s %d %s %d %s %d %d\n",e.id,e.nbre_habitant,e.municipalite,e.date.day,e.date.month,e.date.year,e.nbr_conseillers);
         fclose(f);
         return 1;
     }
     else return 0;
 }
-int modifier( char * filename, int id, electeur )
+int modifier( char * M, int id, election nouv )
 {
     int tr=0;
-    point p;
-    FILE * f=fopen(filename, "r");
+    election e;
+    FILE * f=fopen(M, "r");
     FILE * f2=fopen("nouv.txt", "w");
     if(f!=NULL && f2!=NULL)
     {
-        while(fscanf(f,"%d %s %d %d\n",&p.id,p.couleur,&p.x,&p.y)!=EOF)
+        while(fscanf(f,"%s %d %s %d %s %d %d\n",&e.id,&e.nbre_habitant,e.municipalite,&e.date.day,e.date.month,&e.date.year,&e.nbr_conseillers)!=EOF)
         {
-            if(p.id== id)
+            if(e.id== id)
             {
-                fprintf(f2,"%d %s %d %d\n",nouv.id,nouv.couleur,nouv.x,nouv.y);
+                fprintf(f2,"%s %d %s %d %s %d %d\n",nouv.id,nouv.nbre_habitant,nouv.municipalite,nouv.date.day,nouv.date.month,nouv.date.year,nouv.nbr_conseillers);
                 tr=1;
             }
             else
-                fprintf(f2,"%d %s %d %d\n",p.id,p.couleur,p.x,p.y);
+                fprintf(f2,"%s %d %s %d %s %d %d\n",e.id,e.nbre_habitant,e.municipalite,e.date.day,e.date.month,e.date.year,e.nbr_conseillers);
 
         }
     }
     fclose(f);
     fclose(f2);
-    remove(filename);
-    rename("nouv.txt", filename);
+    remove(M);
+    rename("nouv.txt", M);
     return tr;
 
 }
-int supprimer(char * filename, int id)
+int supprimer(char * M, int id)
 {
     int tr=0;
-    point p;
-    FILE * f=fopen(filename, "r");
+    election e;
+    FILE * f=fopen(M, "r");
     FILE * f2=fopen("nouv.txt", "w");
     if(f!=NULL && f2!=NULL)
     {
-        while(fscanf(f,"%d %s %d %d\n",&p.id,p.couleur,&p.x,&p.y)!=EOF)
+        while(fscanf(f,"%s %d %s %d %s %d %d\n",&e.id,&e.nbre_habitant,e.municipalite,&e.date.day,e.date.month,&e.date.year,&e.nbr_conseillers)!=EOF)
         {
-            if(p.id== id)
+            if(e.id== id)
                 tr=1;
             else
-                fprintf(f2,"%d %s %d %d\n",p.id,p.couleur,p.x,p.y);
+                fprintf(f2,"%s %d %s %d %s %d %d\n",e.id,e.nbre_habitant,e.municipalite,e.date.day,e.date.month,e.date.year,e.nbr_conseillers);
         }
     }
     fclose(f);
     fclose(f2);
-    remove(filename);
-    rename("nouv.txt", filename);
+    remove(M);
+    rename("nouv.txt", M);
     return tr;
 }
-point chercher(char * filename, int id)
+
+election chercher(char * M, int id)
 {
-    point p;
+    election e;
     int tr;
-    FILE * f=fopen(filename, "r");
+    FILE * f=fopen(M, "r");
     if(f!=NULL)
     {
-        while(tr==0&& fscanf(f,"%d %s %d %d\n",&p.id,p.couleur,&p.x,&p.y)!=EOF)
+        while(tr==0&& fscanf(f,"%s %d %s %d %s %d %d\n",&e.id,&e.nbre_habitant,e.municipalite,&e.date.day,e.date.month,&e.date.year,&e.nbr_conseillers)!=EOF)
         {
-            if(p.id== id)
+            if(e.id== id)
                 tr=1;
         }
     }
     fclose(f);
     if(tr==0)
-        p.id=-1;
-    return p;
+        e.id=-1;
+    return e;
 
-}
-    
 }
