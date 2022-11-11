@@ -18,3 +18,5 @@ int ajouter_utilisateur(char *,filename);
 int modifier_utilisateur(char *,int,filename);
 int supprimer_utilisateur(char *,int,filename);
 void afficher_utilisateur(char *,filename);
+
+#endif // UTILISATEUR_H_INCLUDED
