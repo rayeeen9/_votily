@@ -1,27 +1,29 @@
-# _votily#include <stdio.h>
+#include <stdio.h>
 #include <string.h>
-#include"electeur.h"
+#include"election.h"
 
 int main()
 {
-    point p1= {"rouge",1,0,0},p2= {"noir",2,1,1},p3;
-    int x=ajouter("electeur.h", p1);
-    /*
-    if(x==1)
-        printf("\najout de point avec succés");
-    else printf("\nechec ajout");
-        */
-    x=modifier("a",1,p2 );
+    election e1,e2,e3;
+    int x=ajouter("election.txt", e1);
 
     if(x==1)
-        printf("\nModification de point avec succés");
-    else printf("\nechec Modification");
-    x=supprimer("electeur.h",1 );
+        printf("\najout election avec succes");
+    else printf("\nechec ajout");
+
+
+    x=modifier("election.txt",1,e2 );
+
     if(x==1)
-        printf("\nSuppression de point avec succés");
+        printf("\nModification election avec succes");
+    else printf("\nechec Modification");
+/*
+    x=supprimer("election.txt",1 );
+    if(x==1)
+        printf("\nSuppression election avec succes");
     else printf("\nechec Suppression");
-    p3=chercher("electeur.h",3 );
-    if(p3.id==-1)
-        printf("introuvable");
+    e3=chercher("election.txt",3 );
+    if(e3.id==-1)
+        printf("\nintrouvable");*/
     return 0;
 }
